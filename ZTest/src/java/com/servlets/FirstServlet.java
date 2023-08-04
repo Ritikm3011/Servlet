@@ -1,5 +1,5 @@
 package com.servlets;
-
+// Creating Servlet using Implementing Servlet 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.*;

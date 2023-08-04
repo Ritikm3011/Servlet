@@ -17,6 +17,11 @@
         <servlet-class>com.servlets.SecondServlet</servlet-class>
     </servlet>
     
+    <servlet>
+        <servlet-name>MyServlet</servlet-name>
+        <servlet-class>com.servlets.MyServlet</servlet-class>
+    </servlet>
+    
     <!--mapping-->
     <servlet-mapping>
         <servlet-name>first</servlet-name>
@@ -26,6 +31,11 @@
      <servlet-mapping>
         <servlet-name>second</servlet-name>
         <url-pattern>/second</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>MyServlet</servlet-name>
+        <url-pattern>/MyServlet</url-pattern>
     </servlet-mapping>
     
     
