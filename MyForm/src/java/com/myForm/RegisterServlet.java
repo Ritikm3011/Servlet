@@ -1,6 +1,5 @@
 package com.myForm;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.*;
@@ -19,24 +18,18 @@ public class RegisterServlet extends HttpServlet {
         String gender = req.getParameter("user_gender");
         String course = req.getParameter("user_course");
         String condition = req.getParameter("condition");
-       // out.print(condition); // if you uncheck it'll give null
-       
-       // Future Goal: JDBC
-       
-       
-        if(condition != null && condition.equals("checked")) {
-            out.println("<h3>Name: "+name+"</h3>");
-            out.println("<h3>Password: "+password+"</h3>");
-            out.println("<h3>E_mail: "+email+"</h3>");
-            out.println("<h3>Gender: "+gender+"</h3>");
-            out.println("<h3>Course: "+course+"</h3>");
-           // out.println("<h3>Gender: "+gender+"</h3>");
-            
+        // out.print(condition); // if you uncheck it'll give null
+        // Future Goal: JDBC
+        if (condition != null && condition.equals("checked")) {
+            out.println("<h3>Name: " + name + "</h3>");
+            out.println("<h3>Password: " + password + "</h3>");
+            out.println("<h3>E_mail: " + email + "</h3>");
+            out.println("<h3>Gender: " + gender + "</h3>");
+            out.println("<h3>Course: " + course + "</h3>");
+            // out.println("<h3>Gender: "+gender+"</h3>");
+
         } else {
             out.print("<h3>You have not accepted term and conditions...</h3>");
         }
-        
-        
     }
-
 }
