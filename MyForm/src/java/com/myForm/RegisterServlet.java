@@ -8,9 +8,9 @@ import javax.servlet.http.*;
 public class RegisterServlet extends HttpServlet {
 
     @Override
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-        res.setContentType("text/html");
-        PrintWriter out = res.getWriter();
+    public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        resp.setContentType("text/html");
+        PrintWriter out = resp.getWriter();
         out.println("<h2>Wellcome to the Register Servlet!...</h2>");
         String name = req.getParameter("user_name");
         String password = req.getParameter("password");
@@ -26,10 +26,18 @@ public class RegisterServlet extends HttpServlet {
             out.println("<h3>E_mail: " + email + "</h3>");
             out.println("<h3>Gender: " + gender + "</h3>");
             out.println("<h3>Course: " + course + "</h3>");
-            // out.println("<h3>Gender: "+gender+"</h3>");
+            
+            RequestDispatcher rd = req.getRequestDispatcher("SuccessServlet");
+            rd.forward(req, resp);
+            
 
         } else {
             out.print("<h3>You have not accepted term and conditions...</h3>");
+            // I want to include the output of index.html with ^ this msg
+            // get the object of request dispacher
+            RequestDispatcher rd = req.getRequestDispatcher("index.html");
+            //include method which will include output of index.html with above msg...
+            rd.include(req, resp);
         }
     }
 }
