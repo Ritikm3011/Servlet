@@ -26,13 +26,25 @@
                     <div class="card">
                         <div class="card-content">
                             <h3>Register here!!</h3>
+                            <h5 id="msg"></h5>
 
                             <!--Form-->
                             <div class="form" >
-                                <form action="Register" method="post">
+                                <form action="Register" method="post" id="myform">
                                     <input type="text" name="user_name" placeholder="Enter your Name"/>
                                     <input type="password" name="user_password" placeholder="Enter your Password"/>
                                     <input type="email" name="user_email" placeholder="Enter your Email"/>
+                                    <!--taking image input-->
+                                    <div class="file-field input-field">
+                                        <div class="btn">
+                                            <span>File</span>
+                                            <input name="image" type="file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                            <input class="file-path validate" type="text">
+                                        </div>
+                                    </div>
+
                                     <button type="submit" class="btn teal">Submit</button>
                                 </form>
 
@@ -95,8 +107,47 @@
         crossorigin="anonymous"></script>
 
         <script>
-            $(document).ready(function (){
+            $(document).ready(function () {
                 console.log("page is ready....");
+
+                $("#myform").on('submit', function (event) {
+                    event.preventDefault();
+                    var f = $(this).serialize();
+                    console.log(f);
+                    $(".loader").show();
+                    $(".form").hide();
+
+                    $.ajax({
+                        url: "Register",
+                        data: f,
+                        type: 'POST',
+                        success: function (data, textStatus, jqXHR) {
+                            console.log(data);
+                            console.log("sucess......");
+                            $(".loader").hide();
+                            $(".form").show();
+                            if (data.trim() === 'Done') {
+                                $('#msg').html("Succesfully Registered !!")
+                                $("#msg").addClass('green-text')
+                            } else {
+                                $('#msg').html("Something went wrong !!")
+                                $("#msg").addClass('red-text')
+                            }
+
+
+                        },
+                        error: function (jqXHR, textStatus, errorThrown) {
+                            console.log(data);
+                            console.log("Error.....");
+                            $(".loader").hide();
+                            $(".form").show();
+                            $('#msg').html("Something went wrong !!")
+                            $("#msg").addClass('red-text')
+
+                        }
+                    })
+                })
+
             })
         </script>
 
