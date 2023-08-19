@@ -4,18 +4,24 @@
  */
 package com.user;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.*;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Ritik Mondal
  */
+@MultipartConfig
 public class Register extends HttpServlet {
 
     /**
@@ -43,27 +49,41 @@ public class Register extends HttpServlet {
             String name = request.getParameter("user_name");
             String email = request.getParameter("user_email");
             String password = request.getParameter("user_password");
+            Part part = request.getPart("image");
+            String filename = part.getSubmittedFileName();
+           // out.println(filename);
 
 //            out.println(name+"<br>"+email+"<br>"+password);
 // Connection
             try {
-                
+
                 Thread.sleep(2000);
                 Class.forName("com.mysql.jdbc.Driver");
                 Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/form", "root", "Asdfghjkl12.");
 
-                String q = "insert into user(name,email,password) values(?,?,?)";
-                
+                String q = "insert into user(name,email,password, imageName) values(?,?,?,?)";
+
                 PreparedStatement pstm = con.prepareStatement(q);
                 pstm.setString(1, name);
                 pstm.setString(2, email);
                 pstm.setString(3, password);
-                
+                pstm.setString(4, filename);
+
                 pstm.executeUpdate();
+                //uploading image
+                InputStream is = part.getInputStream();
+                byte[] data = new byte[is.available()];
+
+                is.read(data);
+                String path = request.getRealPath("/") + "img" + File.separator + filename;
+                //out.println(path);
+
+                FileOutputStream fos = new FileOutputStream(path);
+                fos.write(data);
+
+                fos.close();
                 out.println("Done");
-                
-                
-                
+
             } catch (Exception e) {
                 e.printStackTrace();
                 out.println("Error");
@@ -71,9 +91,6 @@ public class Register extends HttpServlet {
             }
 
 // querry
-////......
-//            out.println("</body>");
-//            out.println("</html>");
         }
     }
 

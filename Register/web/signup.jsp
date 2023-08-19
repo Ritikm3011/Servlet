@@ -38,7 +38,7 @@
                                     <div class="file-field input-field">
                                         <div class="btn">
                                             <span>File</span>
-                                            <input name="image" type="file">
+                                            <input type="file" name="image" >
                                         </div>
                                         <div class="file-path-wrapper">
                                             <input class="file-path validate" type="text">
@@ -112,7 +112,8 @@
 
                 $("#myform").on('submit', function (event) {
                     event.preventDefault();
-                    var f = $(this).serialize();
+//                    var f = $(this).serialize();
+                    var f = new FormData(this);
                     console.log(f);
                     $(".loader").show();
                     $(".form").hide();
@@ -121,17 +122,22 @@
                         url: "Register",
                         data: f,
                         type: 'POST',
+                        processData: false,
+                        contentType: false,
                         success: function (data, textStatus, jqXHR) {
                             console.log(data);
                             console.log("sucess......");
                             $(".loader").hide();
                             $(".form").show();
+                           
                             if (data.trim() === 'Done') {
                                 $('#msg').html("Succesfully Registered !!")
                                 $("#msg").addClass('green-text')
+                               
                             } else {
-                                $('#msg').html("Something went wrong !!")
+                               // $('#msg').html("Something went wrong !!")
                                 $("#msg").addClass('red-text')
+                                
                             }
 
 
@@ -144,7 +150,11 @@
                             $('#msg').html("Something went wrong !!")
                             $("#msg").addClass('red-text')
 
-                        }
+                      }
+                      
+//                        processData: false;
+//                        contentType: false;
+
                     })
                 })
 
