@@ -23,7 +23,7 @@
         <div class="container center-align">
             <div class="row">
                 <div class="col m6 offset-m3">
-                    <div class="card">
+                    <div class="card "> 
                         <div class="card-content">
                             <h3>Register here!!</h3>
                             <h5 id="msg"></h5>
@@ -45,7 +45,11 @@
                                         </div>
                                     </div>
 
-                                    <button type="submit" class="btn teal">Submit</button>
+                                    
+                                    <button class="btn waves-effect waves-light teal lighten-1 z-depth-5" type="reset" >Reset</button>
+                                    <button type="submit" class="btn waves-effect  teal darken-1 z-depth-5">Submit</button>
+                                    <a href="show_users" class="btn waves-effect">Show User</a>
+                                
                                 </form>
 
                             </div>
@@ -129,15 +133,15 @@
                             console.log("sucess......");
                             $(".loader").hide();
                             $(".form").show();
-                           
+
                             if (data.trim() === 'Done') {
                                 $('#msg').html("Succesfully Registered !!")
                                 $("#msg").addClass('green-text')
-                               
+
                             } else {
-                               // $('#msg').html("Something went wrong !!")
+                                // $('#msg').html("Something went wrong !!")
                                 $("#msg").addClass('red-text')
-                                
+
                             }
 
 
@@ -150,8 +154,8 @@
                             $('#msg').html("Something went wrong !!")
                             $("#msg").addClass('red-text')
 
-                      }
-                      
+                        }
+
 //                        processData: false;
 //                        contentType: false;
 
